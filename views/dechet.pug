@@ -1,0 +1,25 @@
+html
+  head
+    title= title
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
+    link(rel='stylesheet' href='style.css' type='text/css' crossorigin="anonymous")
+  body
+    main(role="main")
+      include menu.pug
+      div(class="container")
+        h5(class="spacerTop" style="font-size:5vw;")= "Fiche Dechet!"
+
+        div(class="" style="padding:2vh;" )
+            div(class="")
+              h3()= dechet.Nom
+              h5(class="float")= "format et unité de mesure: "
+              div()= dechet["format et unité de mesure"]   
+              
+              if dechet["Typologie déchets"]
+                div()= "Typologie de dechet"
+                each typologie in dechet["Typologie déchets"]
+                  div()= typologie.Name
+                if (dechet.Image)
+                 each image in dechet.Image
+                   div(class="row")
+                     img(class="m-1 col" src=image.url)

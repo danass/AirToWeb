@@ -1,0 +1,24 @@
+html
+  head
+    title= title
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
+    link(rel='stylesheet' href='style.css' type='text/css' crossorigin="anonymous")
+  body
+    main(role="main")
+      include menu.pug
+      div(class="container")
+        h5(class="spacerTop" style="font-size:5vw;")= "Les Apprenants!"
+
+        div(class="card-columns" style="padding:2vh;" )
+        
+          each person in persons
+            div(class="card")
+              img(class="card-img-top" src=person.Photo[0].thumbnails.large.url)
+              div(class="")
+                div(class="d-flex align-items-end flex-column")
+                  h5(class="p-2" style=" font-size:1.7vw;")= person.Prenom
+                div(class="") 
+                  p(class="card-header  bg-light" style=" font-size:1.5vw;")= person.Moto
+                div(class="" style="font-size:1vw;" )
+                    a(href=`journal/` + person.Prenom class=" p-2  " ) Journal
+                    a(href=`apprenants/` + person.Prenom class="p-2" ) Fiche

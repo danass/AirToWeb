@@ -1,0 +1,23 @@
+html
+  head
+    title= title
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
+    link(rel='stylesheet' href='../style.css' type='text/css' crossorigin="anonymous")
+  body
+    main(role="main")
+      div(class="container")
+        h1(class="spacer")= persons.Prenom + " " +persons.Nom
+        each journalEntry in persons["Journal de bord"]
+          div(class="row")
+         
+            div(class="col badge badge-light mb-0")= journalEntry.TimeStr
+            div(class="col badge badge-secondary ml-5")= "Mood: " +  journalEntry.Mood
+          div(class="row") 
+            p(class="col breadcrumb" style="padding:2vw; white-space: pre-wrap;")= journalEntry["Entrée:"]
+          div(class="row d-flex flex-wrap justify-content-between")
+            each pj in journalEntry["Pièces jointes"] ? journalEntry["Pièces jointes"] : ["Walou"] 
+             if pj.thumbnails
+              div(class="col d-flex flex-column align-items-end" style="min-width:18vw;")
+               a(href=pj.url)
+                img(class="img-thumbnail " src=pj.thumbnails.large.url)
+          div(class="spacer")

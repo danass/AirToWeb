@@ -1,0 +1,37 @@
+html
+  head
+    title= title
+    link(rel='stylesheet' href='style.css' type='text/css' crossorigin="anonymous")
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
+    script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js')
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js")
+    script(src='clientJquery.js')
+  body
+    main(role="main")
+      include menu.pug
+      div(class="container")
+      
+        h5(class="spacerTop" style="font-size:5vw;")= "Competences - Openbadges auto-distribués"
+
+        div(class="card-columns card-columnp " style="padding:2vh;" )
+        
+         each person in persons
+            div(class="card")
+               h5(class="card-header ")=person.Name
+               if(person.OpenBadges) 
+                div(class="card-body  " style="")
+                - arrayClassList = ["list-group-item-primary", "list-group-item-secondary", "list-group-item-success", "list-group-item-danger", "list-group-item-warning", "list-group-item-info"]
+                  - indexActif = 0
+                  div(class="card-columns p-5 ")
+                    each badge in person.OpenBadges
+                       button(type="button" class=" mb-3  btn card  " + arrayClassList[indexActif]
+                       data-toggle="popover" data-trigger="focus" title="Je peux:" data-content=badge["car je suis capable de"]
+                       style=" padding:1vh;")= badge["la compétence suivante :"]
+                       if (indexActif >= arrayClassList.length-1 ) 
+                          - indexActif = -1
+                       - indexActif = indexActif + 1
+      
+
+
+                  

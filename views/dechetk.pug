@@ -1,0 +1,22 @@
+html
+  head
+    title= title
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
+    link(rel='stylesheet' href='style.css' type='text/css' crossorigin="anonymous")
+  body
+    main(role="main")
+      include menu.pug
+      div(class="container")
+        h5(class="spacerTop" style="font-size:5vw;")= "La déchéthèque!"
+
+        div(class="card-columns" style="padding:2vh;" )
+        
+          each dechet in dechets
+            div(class="card")
+              a(href=`dechetk/` + dechet._id)= dechet.Nom
+                if (dechet.Image)
+                 each image in dechet.Image
+                  if (image.thumbnails)
+                    img(class="card-img-top" src=image.thumbnails.large.url)
+                  else
+                    img(class="card-img-top" src=image.url)

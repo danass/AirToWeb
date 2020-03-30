@@ -1,0 +1,32 @@
+.inlineDisp {
+  display: flex;
+}
+
+.list-group-item {
+  min-width: 194px;
+}
+
+.moto {
+  display: table;
+  font-size: small;
+}
+
+.spacer {
+  margin-bottom: 10vh;
+}
+
+.spacerTop {
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+}
+
+.card-columnp {
+  -webkit-column-count: 1;
+  -moz-column-count: 1;
+  column-count: 1 !important;
+  -webkit-column-gap: 1.25rem;
+  -moz-column-gap: 1.25rem;
+  column-gap: 1.25rem;
+  orphans: 1;
+  widows: 1;
+}
