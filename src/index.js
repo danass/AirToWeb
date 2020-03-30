@@ -83,6 +83,30 @@ site.get("/apprenants/:user", function(req, res, next) {
   next();
 });
 
+
+site.get("/:enseignants", function(req, res, next) {
+  if (req.params.enseignants == "enseignants") {
+    res.render("enseignants", {
+      title: "Trombi Enseignants - Formation Design Circulaire",
+      persons: data
+    });
+  }
+  next();
+});
+
+site.get("/enseignants/:user", function(req, res, next) {
+  for (let person of data) {
+    if (req.params.user === person.Prenom) {
+      res.render("ficheindividuelle", {
+        title: "Fiche de " + person.Prenom + " - Formation Design Circulaire",
+        persons: person
+      });
+    }
+  }
+  next();
+});
+
+
 site.get("/journal/:user", function(req, res, next) {
   for (let person of data) {
     if (req.params.user === person.Prenom) {

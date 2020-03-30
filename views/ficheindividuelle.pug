@@ -7,11 +7,23 @@ html
     main(role="main")
       div(class="container")
         h1(class="spacer")
-        div(class="  " style="background-color: grey; padding:10px;" )
-          div(class="d-inline-flex p-2 " style="background-color: blue; padding:10px;")
-            div(class=" p-2" style="background-color: orange; padding:0px;")= persons.Role
-            div(class="p-2" style="background-color: red; padding:0px;")= persons.Moto
+        div(class="  " style=" padding:10px;" )
+          div(class="d-inline-flex p-2 " style=" padding:10px;")
+            div(class=" p-2" style=" padding:0px;")= persons.Role
+            div(class="p-2" style="padding:0px;")= persons.Moto
           div(class="")
-            img(class="" style="background-color: green; padding:10px;" src=persons.Photo[0].thumbnails.small.url) 
+            img(class="" style="padding:10px;" src=persons.Photo[0].thumbnails.large.url) 
+          h4()="Interets"
+          if persons["Interet Specificiques"]
+            each interet in persons["Interet Specificiques"]
+              div(class="row")
+                div(class="col")=interet.Intérêt
+                div(class="col")=interet["Réalisations/Commentaire"]
 
+          h4()="Interets"
+          if persons["Interet Specificiques"]
+            each interet in persons["Interet Specificiques"]
+              div(class="row")
+                div(class="col")=interet.Intérêt
+                div(class="col")=interet["Réalisations/Commentaire"]
           
