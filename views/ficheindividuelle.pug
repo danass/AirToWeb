@@ -13,17 +13,31 @@ html
             div(class="p-2" style="padding:0px;")= persons.Moto
           div(class="")
             img(class="" style="padding:10px;" src=persons.Photo[0].thumbnails.large.url) 
-          h4()="Interets"
+          h4()="Interets" 
           if persons["Interet Specificiques"]
             each interet in persons["Interet Specificiques"]
               div(class="row")
                 div(class="col")=interet.Intérêt
                 div(class="col")=interet["Réalisations/Commentaire"]
-
-          h4()="Interets"
-          if persons["Interet Specificiques"]
-            each interet in persons["Interet Specificiques"]
-              div(class="row")
-                div(class="col")=interet.Intérêt
-                div(class="col")=interet["Réalisations/Commentaire"]
+                
           
+          h4()="Interview"
+          if persons["Interview"]
+            each interview in persons["Interview"]
+              div(class="")
+                h6(class="row ")= "Comment ton parcours a été influencé par l'approche par la matière? "
+                div(class="col py-3  ")=interview.Q1
+                h6(class="row")= "Quel est ta vision du design circulaire?"
+                div(class="col py-3  ")=interview.Q2
+                h6(class="row")= "Quel est ton projet personnel?"
+                div(class="col py-3")=interview.Q3
+                h6(class="row")= "Qu’as-tu fais dans les projets collectifs exposés?"
+                div(class="col py-3")=interview.Q4  
+                h6(class="row")= "Une référence marquante à partager avec le public ?"
+                div(class="col py-3")=interview.Q5
+                h6(class="row")= "En une phrase, comment résumer le plus important?"
+                div(class="col py-3")=interview.Q6                
+                
+          
+          h4()="Projet Perso"
+            div(style="margin-bottom:350px")
