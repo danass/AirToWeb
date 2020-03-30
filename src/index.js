@@ -1,8 +1,13 @@
+#!/usr/bin/env node
+
 const express = require("express");
 const site = express();
 const _ = require("lodash");
 const fs = require("fs");
 var UpdateData = require("./updateData.js");
+
+const rootdir = process.cwd()
+console.log("rot", rootdir)
 
 const data = JSON.parse(fs.readFileSync("data/data.json", "utf8")); //Parse Source JSON des datas
 const dechetdata = JSON.parse(fs.readFileSync("data/dechetheque.json", "utf8")); //Parse Source JSON des datas
@@ -87,4 +92,4 @@ site.get("/journal/:user", function(req, res, next) {
   res.end();
 });
 
-site.listen(80);
+site.listen(8080);
