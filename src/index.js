@@ -23,8 +23,11 @@ const foldir = process.cwd() + "/public";
 site.set("view engine", "pug");
 site.use(express.static(foldir));
 
-site.get("/", function(req, res) {
-  res.send("Bienvenue");
+site.get("/", function(req, res, next) {
+  res.render("index", {
+    title: "Formation Design Circulaire"
+  });
+  next();
 });
 
 site.get("/competences", function(req, res, next) {
