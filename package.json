@@ -1,21 +1,19 @@
 {
-  "name": "extracted-simplified-en-cours-v02",
+  "name": "AirToWeb",
   "version": "0.1.0",
-  "description": "",
-  "main": "src/index.js",
+  "description": "Interface between airtable and webplatform node + pug",
+  "main": "index.js",
   "scripts": {
-    "start": "node src/index.js"
+  "start": "node src/index.js"
   },
-  "dependencies": {
-    "air_json": "^1.0.1",
-    "express": "^4.17.1",
-    "jquery": "3.4.1",
-    "jsdom": "16.2.1",
-    "lodash": "^4.17.15",
-    "pug": "2.0.4"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danass/AirToWeb.git"
   },
-  "devDependencies": {
-    "nodemon": "1.18.4"
+  "author": "Daniel Assayag",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danass/AirToWeb/issues"
   },
-  "keywords": []
+  "homepage": "https://github.com/danass/AirToWeb#readme"
 }
