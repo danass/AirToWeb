@@ -5,23 +5,33 @@ html
     link(rel='stylesheet' href='../style.css' type='text/css' crossorigin="anonymous")
   body
     main(role="main")
+      include menu.pug    
       div(class="container")
         h1(class="spacer")
         div(class="  " style=" padding:10px;" )
-          div(class="d-inline-flex p-2 " style=" padding:10px;")
-            div(class=" p-2" style=" padding:0px;")= persons.Role
-            div(class="p-2" style="padding:0px;")= persons.Moto
-          div(class="")
+          div(class="d-flex justify-content-center " style=" padding:10px; ")
+            h4(class=" p-2" style=" padding:0px;")= persons.Role
+            div(class="p-2" style="padding:0px;vertical-align:center; align-self:center;")= persons.Moto
+          div(class="p-5")
             img(class="" style="padding:10px;" src=persons.Photo[0].thumbnails.large.url) 
-          h4()="Interets" 
-          if persons["Interet Specificiques"]
-            each interet in persons["Interet Specificiques"]
-              div(class="row")
-                div(class="col")=interet.Intérêt
-                div(class="col")=interet["Réalisations/Commentaire"]
-                
+          if persons["Soumission"]  
+            each soumission in persons["Soumission"]
+              if soumission.Titre
+                h2(class="p-5")= soumission.Titre            
+          h4(class="p-5")= "Badges de Comptences"
+              div(class="row p-5")
+                div(class="col-sm")
+                  img(class ="" src="../../images/0_design.jpg"  style="width: 30%; object-fit: none;")
+                div(class="col-sm")
+                    img(class="" src="../../images/0_ecol.jpg"  style="width: 30%; object-fit: none;")
+                div(class="col-sm")
+                  img(class=""  src="../../images/0_explormat.jpg"  style="width: 30%; object-fit: none;")
+                div(class="col-sm"   )
+                  img(class="" src="../../images/0_fab.jpg"  style="width: 30%; object-fit: none;")
+                div(class="col-sm "  )
+                  img(class="" src="../../images/0_info.jpg" style="width: 30%; object-fit: none;")
           
-          h4()="Interview"
+          h4(class="p-5")="Interview"
           if persons["Interview"]
             each interview in persons["Interview"]
               div(class="")
@@ -38,6 +48,24 @@ html
                 h6(class="row")= "En une phrase, comment résumer le plus important?"
                 div(class="col py-3")=interview.Q6                
                 
-          
-          h4()="Projet Perso"
-            div(style="margin-bottom:350px")
+          if persons["Soumission"]
+            h4(class="p-5")="Projet Perso"
+          if persons["Soumission"]  
+            each soumission in persons["Soumission"]
+              if soumission["Rendu (pdf, doc)"]
+                  each rendu in soumission["Rendu (pdf, doc)"]
+                    a(href=rendu.url)  
+                      img(class="p-2" src=rendu.thumbnails.large.url)    
+                      figcaption()=soumission.Soumission  
+
+
+          if persons["Reserve des Arts (annexes)"]
+            h4(class="p-5")="Reserve des Arts"
+            iframe(src=persons["Reserve des Arts (annexes)"] width="640" height="360" frameborder="0" )
+          if persons["Reserve des Arts pdf (optionnel)"] 
+            h4(class="p-5")="Reserve des Arts"
+              a(href=persons["Reserve des Arts pdf (optionnel)"].url)  
+                if persons["Reserve des Arts pdf (optionnel)"].thumbnails.large.url
+                  img(class="p-2" src=persons["Reserve des Arts pdf (optionnel)"].thumbnails.large.url)
+                else 
+                  img(class="p-2" src=persons["Reserve des Arts pdf (optionnel)"].url)

@@ -65,12 +65,12 @@ const mainAir = new AirJSON({
 });
 
 try {
-  if (fs.existsSync("data/newdata.json")) {
+  if (fs.existsSync("data/data.json")) {
     console.log("The file exists. (data.json)");
   } else {
     mainAir.fetch().then(t =>
       fs.writeFile(
-        "data/newdata.json",
+        "data/data.json",
         JSON.stringify(t.nested(2)),
 
         function callback(err) {

@@ -24,8 +24,9 @@ site.set("view engine", "pug");
 site.use(express.static(foldir));
 
 site.get("/", function(req, res, next) {
-  res.render("index", {
-    title: "Formation Design Circulaire"
+  res.render("apprenants", {
+    title: "Formation Design Circulaire",
+    persons: data
   });
   next();
 });
