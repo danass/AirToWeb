@@ -71,3 +71,7 @@ html
                      img(src=rendu.thumbnails.large.url)
                    else
                      img(src=rendu.url)
+
+          if persons["ParisCo"]
+            h4(class="p-5")="Paris&Co"
+              a(href=persons["ParisCo"].url)="le"
