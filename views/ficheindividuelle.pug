@@ -81,7 +81,7 @@ html
           if persons["Mo"]
             h4(class="p-5")="Maison & Objets"
             each mo in persons["Mo"]
-              div()=mo.type
+              div()
               if mo.type == "video/mp4"
                 video(controls)
                   source(src=mo.url type="video/mp4")
