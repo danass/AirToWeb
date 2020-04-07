@@ -62,10 +62,8 @@ html
           if persons["Reserve des Arts (annexes)"]
             h4(class="p-5")="Reserve des Arts"
             iframe(src=persons["Reserve des Arts (annexes)"] width="640" height="360" frameborder="0" )
-          if persons["Reserve des Arts pdf (optionnel)"] 
-            h4(class="p-5")="Reserve des Arts"
-              a(href=persons["Reserve des Arts pdf (optionnel)"].url)  
-                if persons["Reserve des Arts pdf (optionnel)"].thumbnails.large.url
-                  img(class="p-2" src=persons["Reserve des Arts pdf (optionnel)"].thumbnails.large.url)
-                else 
-                  img(class="p-2" src=persons["Reserve des Arts pdf (optionnel)"].url)
+          if persons["Reserve des Arts"]
+             h4(class="p-5")="Reserve des Arts"
+             each rendu in persons["Reserve des Arts"]
+               a(href=rendu.url)
+                 img(src=rendu.thumbnails.large.url)
