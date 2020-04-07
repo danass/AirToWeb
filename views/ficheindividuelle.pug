@@ -66,4 +66,8 @@ html
              h4(class="p-5")="Reserve des Arts"
              each rendu in persons["Reserve des Arts"]
                a(href=rendu.url)
-                 img(src=rendu.thumbnails.large.url)
+                 if rendu.thumbnails
+                   if rendu.thumbnails.large
+                     img(src=rendu.thumbnails.large.url)
+                   else
+                     img(src=rendu.url)
