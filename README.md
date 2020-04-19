@@ -1,6 +1,6 @@
 AirToWeb
 
-A Framework to parse and display Json data from Airtable databse using NODE.JS + PUG
+A Framework to parse and display Json data from Airtable database using NODE.JS + PUG
 
 
 
