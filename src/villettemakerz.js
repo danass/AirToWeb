@@ -34,6 +34,14 @@ site.get("/", function(req, res, next) {
     next();
   });
   
+  site.get("/cours", function(req, res, next) {
+    res.render("vm/cours", {
+      title: "Liste des cours - Formation Design Circulaire",
+    });
+  
+    next();
+  });
+  
   site.get("/evaluation", function(req, res, next) {
     res.render("vm/evaluation", {
       title: "Evaluation Retours Formation - Formation Design Circulaire",
