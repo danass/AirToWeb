@@ -43,6 +43,22 @@ site.get("/", function(req, res, next) {
     next();
   });
   
+  site.get("/softskills", function(req, res, next) {
+    res.render("vm/softskills", {
+      title: "Softskills - Formation Design Circulaire"
+    });
+  
+    next();
+  });
+
+  site.get("/retours", function(req, res, next) {
+    res.render("vm/retours", {
+      title: "Retours evaluation - Formation Design Circulaire"
+    });
+  
+    next();
+  });
+  
   
   site.get("/pads", function(req, res, next) {
     res.render("vm/pads", {

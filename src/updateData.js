@@ -65,7 +65,7 @@ const mainAir = new AirJSON({
 });
 
 try {
-  if (fs.existsSync("data/data.json")) {
+  if (fs.existsSync("data/dataa.json")) {
     console.log("The file exists. (data.json)");
   } else {
     mainAir.fetch().then(t =>
