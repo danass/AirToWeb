@@ -77,4 +77,10 @@ RewriteCond %{HTTP_USER_AGENT} ^WWWOFFLE [OR]
 RewriteCond %{HTTP_USER_AGENT} ^Xaldon\ WebSpider [OR]
 RewriteCond %{HTTP_USER_AGENT} ^Zeus
 RewriteRule ^.* - [F,L]
- 
+
+SetEnvIfNoCase User-Agent .*bot.* search_robot
+SetEnvIfNoCase User-Agent .*bing.* search_robot
+SetEnvIfNoCase User-Agent .*crawl.* search_robot
+Order Deny,Allow
+Deny from env=search_robot
+Allow from All

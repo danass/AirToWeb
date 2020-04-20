@@ -17,6 +17,7 @@ html
         div(class="card-columns card-columnp " style="padding:2vh;" )
         
          each person in persons
+           if person.Role == "Apprenant"
             div(class="card")
                h5(class="card-header ")=person.Name
                if(person.OpenBadges) 
