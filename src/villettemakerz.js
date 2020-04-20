@@ -4,6 +4,7 @@ const site = express();
 var databases = require("./databases.js"); //require('./databases')();
 const data = databases.data
 const dechetdata = databases.dechetdata
+const evaluation = databases.evaluation
 
 module.exports = function(site){
 
@@ -28,6 +29,15 @@ site.get("/", function(req, res, next) {
     res.render("vm/competences", {
       title: "Compétences déclarées - Formation Design Circulaire",
       persons: data
+    });
+  
+    next();
+  });
+  
+  site.get("/evaluation", function(req, res, next) {
+    res.render("vm/evaluation", {
+      title: "Evaluation Retours Formation - Formation Design Circulaire",
+      evaluation: evaluation
     });
   
     next();

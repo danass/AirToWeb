@@ -8,7 +8,7 @@ var UpdateData = require("./updateData.js");
 require('./villettemakerz')(site);
 
 const rootdir = process.cwd()
-console.log("rot", rootdir)
+console.log(rootdir)
 
 
 
