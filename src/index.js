@@ -10,13 +10,9 @@ const fs = require("fs");
 var UpdateData = require("./updateData.js");
 require('./villettemakerz')(site);
 
-
-g
 const privateKey = fs.readFileSync('/etc/letsencrypt/live/dc.villettemakerz.com/privkey.pem', 'utf8');
 const certificate = fs.readFileSync('/etc/letsencrypt/live/dc.villettemakerz.com/cert.pem', 'utf8');
 const ca = fs.readFileSync('/etc/letsencrypt/live/dc.villettemakerz.com/chain.pem', 'utf8');
-
-
 
 const credentials = {
 	key: privateKey,
@@ -28,9 +24,6 @@ const httpsServer = https.createServer(credentials, site);
 
 const rootdir = process.cwd()
 console.log(rootdir)
-
-
-
 
 const httpServer = http.createServer(site);
 
