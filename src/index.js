@@ -10,6 +10,8 @@ const fs = require("fs");
 var UpdateData = require("./updateData.js");
 require('./villettemakerz')(site);
 
+const aws = process.platform != "win32"? true: false
+if(aws) {
 const privateKey = fs.readFileSync('/etc/letsencrypt/live/dc.villettemakerz.com/privkey.pem', 'utf8');
 const certificate = fs.readFileSync('/etc/letsencrypt/live/dc.villettemakerz.com/cert.pem', 'utf8');
 const ca = fs.readFileSync('/etc/letsencrypt/live/dc.villettemakerz.com/chain.pem', 'utf8');
@@ -21,6 +23,7 @@ const credentials = {
 };
 
 const httpsServer = https.createServer(credentials, site);
+}
 
 const rootdir = process.cwd()
 console.log(rootdir)
@@ -31,6 +34,8 @@ httpServer.listen(8081, () => {
 	console.log('HTTP Server running on port 8081');
 });
 
+
+if(aws)
 httpsServer.listen(8082, () => {
 	console.log('HTTPS Server running on port 8082');
 });
