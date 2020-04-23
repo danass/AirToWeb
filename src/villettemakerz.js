@@ -1,5 +1,10 @@
 const express = require("express");
 const site = express();
+const fs = require("fs");
+
+
+
+
 
 var databases = require("./databases.js"); //require('./databases')();
 const data = databases.data
@@ -160,7 +165,6 @@ site.get("/", function(req, res, next) {
   });
   //site.get('*', function(req, res) {  res.send('error');});
  
-  site.listen(8080);
+  
 }
-
 
