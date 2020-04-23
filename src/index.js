@@ -11,7 +11,7 @@ var UpdateData = require("./updateData.js");
 require('./villettemakerz')(site);
 
 
-
+g
 const privateKey = fs.readFileSync('/etc/letsencrypt/live/dc.villettemakerz.com/privkey.pem', 'utf8');
 const certificate = fs.readFileSync('/etc/letsencrypt/live/dc.villettemakerz.com/cert.pem', 'utf8');
 const ca = fs.readFileSync('/etc/letsencrypt/live/dc.villettemakerz.com/chain.pem', 'utf8');
@@ -35,11 +35,11 @@ console.log(rootdir)
 const httpServer = http.createServer(site);
 
 httpServer.listen(8081, () => {
-	console.log('HTTP Server running on port 80');
+	console.log('HTTP Server running on port 8081');
 });
 
-httpsServer.listen(443, () => {
-	console.log('HTTPS Server running on port 443');
+httpsServer.listen(444, () => {
+	console.log('HTTPS Server running on port 444');
 });
 
 
