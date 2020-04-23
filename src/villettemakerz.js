@@ -1,10 +1,5 @@
 const express = require("express");
 const site = express();
-const fs = require("fs");
-
-
-
-
 
 var databases = require("./databases.js"); //require('./databases')();
 const data = databases.data
