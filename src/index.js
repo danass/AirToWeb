@@ -22,7 +22,7 @@ const credentials = {
 	ca: ca
 };
 
-const httpsServer = https.createServer(credentials, site);
+
 }
 
 const rootdir = process.cwd()
@@ -35,10 +35,12 @@ httpServer.listen(8081, () => {
 });
 
 
-if(aws)
+if(aws) {
+const httpsServer = https.createServer(credentials, site);
 httpsServer.listen(8082, () => {
 	console.log('HTTPS Server running on port 8082');
 });
+}
 
 
 
