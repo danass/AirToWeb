@@ -31,8 +31,8 @@ httpServer.listen(8081, () => {
 	console.log('HTTP Server running on port 8081');
 });
 
-httpsServer.listen(445, () => {
-	console.log('HTTPS Server running on port 445');
+httpsServer.listen(434, () => {
+	console.log('HTTPS Server running on port 434');
 });
 
 
