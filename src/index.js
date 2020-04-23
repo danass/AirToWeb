@@ -14,7 +14,7 @@ console.log(rootdir)
 
 
 
-// const fields = ["Prenom", "Nom", "Moto"];
+// const fields = ["Prenom", "Nom", "Moto"]; //clés de lecture
 
 // const mapfield = _.map(fields, field => {
 
