@@ -14,4 +14,3 @@ module.exports = this.databases
 //console.log(this)
 
 const aws = process.platform != "win32"? true: false
-console.log(aws)
