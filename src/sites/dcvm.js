@@ -1,10 +1,15 @@
+//this page is the routing for DCVM website, an instance of an airtable based website structuring interaction in  a classroom and the follow up of the students
+//Most of the structuring is made within Pug
+
 const express = require("express");
 const site = express();
+var databases = require("../databases.js");
 
-var databases = require("./databases.js"); //require('./databases')();
-const data = databases.data
-const dechetdata = databases.dechetdata
-const evaluation = databases.evaluation
+// local names for databases (for easyness)
+const data = databases.db.dcvm.data
+const dechetdata = databases.db.dechetheque.data
+const evaluation = databases.db.evaluation.data
+
 
 module.exports = function(site){
 
@@ -12,9 +17,6 @@ module.exports = function(site){
 
     site.set("view engine", "pug");
     site.use(express.static(foldir));
-
-
-
     
 
 site.get("/", function(req, res, next) {
@@ -158,7 +160,7 @@ site.get("/", function(req, res, next) {
     }
     res.end();
   });
-  //site.get('*', function(req, res) {  res.send('error');});
+ 
  
   
 }

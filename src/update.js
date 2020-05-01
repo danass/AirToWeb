@@ -2,20 +2,7 @@ const fs = require("fs");
 const AirJSON = require("air_json");
 var config = require("./config.js");
 
-const path = "data/data.json"
-const getFileUpdatedDate = (path) => {
-  const stats = fs.statSync(path)
-  console.log(stats)
-  return stats.mtime
-}
-var databases = require("./databases.js"); //require('./databases')();
-const data = databases.data
-
-var MD5 = require("crypto-js/md5");
-console.log(MD5(data).toString());
-
-console.log("487f7b22f68312d2c1bbc93b1aea445b")
-
+var databases = require("./databases.js") //require('./databases')();
 
 
 // const dechetkAir = new AirJSON({

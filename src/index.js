@@ -9,16 +9,15 @@ const https = require('https');
 const fs = require("fs");
 
 //routing
-require('./villettemakerz')(site);
+require('./sites/dcvm')(site);
 
 //maintaining uptodate databases
-var updateData = require("./updateData.js");
+var updateData = require("./update.js");
 
 
 //env variables
 // only read https when on server. set false if no https.
 const aws = process.platform != "win32"? true: false
-const rootdir = process.cwd()
 
 // setup http server
 const httpServer = http.createServer(site);
@@ -29,7 +28,7 @@ httpServer.listen(httpPort, () => {
 	console.log('HTTP Server running on port ' + httpPort);
 });
 
-// setup https. (only on webserver)
+// setup https. (only on webserver) //modify with your letsencrypt files
 if(aws) {
 const privateKey = fs.readFileSync('/etc/letsencrypt/live/dc.villettemakerz.com/privkey.pem', 'utf8');
 const certificate = fs.readFileSync('/etc/letsencrypt/live/dc.villettemakerz.com/cert.pem', 'utf8');

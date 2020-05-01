@@ -1,10 +1,12 @@
+//module working but dirty
+
 const _ = require("lodash");
 const fs = require("fs");
 
 var databases = require("./databases.js"); //require('./databases')();
-const data = databases.data
-const dechetdata = databases.dechetdata
-const evaluation = databases.evaluation
+const data = databases.db.dcvm.data
+const dechetdata = databases.db.dechetheque.data
+const evaluation = databases.db.evaluation.data
 
 // output for pug reading 
 var outputpug = [] 
