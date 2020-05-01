@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+//modules
 const express = require("express");
 const site = express();
 const _ = require("lodash");
@@ -7,22 +8,28 @@ const http = require('http');
 const https = require('https');
 const fs = require("fs");
 
-var UpdateData = require("./updateData.js");
+//routing
 require('./villettemakerz')(site);
 
+//maintaining uptodate databases
+var updateData = require("./updateData.js");
+
+
+//env variables
+// only read https when on server. set false if no https.
 const aws = process.platform != "win32"? true: false
-
-
 const rootdir = process.cwd()
-console.log(rootdir)
 
+// setup http server
 const httpServer = http.createServer(site);
+const httpPort = 80
+if(aws) {httpPort = 8081}
 
-httpServer.listen(8081, () => {
-	console.log('HTTP Server running on port 8081');
+httpServer.listen(httpPort, () => {
+	console.log('HTTP Server running on port ' + httpPort);
 });
 
-
+// setup https. (only on webserver)
 if(aws) {
 const privateKey = fs.readFileSync('/etc/letsencrypt/live/dc.villettemakerz.com/privkey.pem', 'utf8');
 const certificate = fs.readFileSync('/etc/letsencrypt/live/dc.villettemakerz.com/cert.pem', 'utf8');
@@ -39,14 +46,3 @@ httpsServer.listen(8082, () => {
 	console.log('HTTPS Server running on port 8082');
 });
 }
-
-
-
-
-
-// const fields = ["Prenom", "Nom", "Moto"]; //clés de lecture
-
-// const mapfield = _.map(fields, field => {
-
-//   return data.map(d => d[field] && console.log(field));
-// });
