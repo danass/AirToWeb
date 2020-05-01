@@ -2,64 +2,58 @@ const fs = require("fs");
 const AirJSON = require("air_json");
 var config = require("./config.js");
 
-var databases = require("./databases.js") //require('./databases')();
+require("./databases.js") //require('./databases')();
 
+// console.log(db.dcvm.md5)
+// console.log(config.dechetheque.name)
 
-// const dechetkAir = new AirJSON({
-//   apiKey: config.dechetheque.auth_key,
-//   baseID: config.dechetheque.base_name,
-//   tableID: "1-Déchet",
-//   view: "Grid view",
-// });
+function update(configname, tableID, maxRecords) {
+ let airJSON = new AirJSON({
+    apiKey: config[configname].auth_key,
+    baseID: config[configname].base_name,
+    tableID: tableID,
+    //maxRecords: 32,
+    maxRecords: maxRecords,
+    view: "Grid view",
+ 
+  });
 
-// try {
-//   if (fs.existsSync("data/dechetheque.json")) {
-//     console.log("The file exists. (dechetheque.json)");
-//   } else {
-//     dechetkAir.fetch().then(t =>
-//       fs.writeFile(
-//         "data/dechetheque.json",
-//         JSON.stringify(t.nested(2)),
+  try {
+      airJSON.fetch().then(t =>
+        fs.writeFile(
+          "data/" + configname + ".temp.json",
+          JSON.stringify(t.nested(2)),
+          function callback(err) {
+            const tempfile = JSON.parse(fs.readFileSync("data/" + configname + ".temp.json"))
+            //console.log("tempfile", md5(tempfile))
+            try {
+              //console.log(db[configname].md5 )
+               if(db[configname].md5 != md5(tempfile)) 
+                {
+                fs.renameSync("data/" + configname + ".temp.json", "data/" + configname + ".json");
+                console.log("temps file replace old "+configname+" version")
+                }
+                else {
+                  console.log("file: "+configname+" already up to date")
+                }
+            } catch(e) {
+              if (e instanceof TypeError) {
+                fs.renameSync("data/" + configname + ".temp.json", "data/" + configname + ".json");
+                console.log("temps file "+configname+" moved to create new database")
+              }
+              else console.error(e);
+            }
 
-//         function callback(err) {
-//           console.log("dechetk updated", err); //sasa
-//         }
-//       )
-//     );
-//   }
-// } catch (err) {
-//   console.error(err);
-// }
+          }
+        )
+      );
+  } catch (err) {
+    console.error(err);
+  }
+}
 
-//get data from airtable
-// const mainAir = new AirJSON({
-//   apiKey: config.main.auth_key,
-//   baseID: config.main.base_name,
-//   tableID: "Personne",
-//    maxRecords: 32,
-//   view: "Grid view",
-// });
-
-
-
-// try {
-//   if (fs.existsSync("data/data.json")) {
-//     console.log("The file exists. (data.json)");
-//   } else {
-//     mainAir.fetch().then(t =>
-//       fs.writeFile(
-//         "data/data.json",
-//         JSON.stringify(t.nested(2)),
-
-//         function callback(err) {
-//           console.log("data updated", err); //sasa
-//         }
-//       )
-//     );
-//   }
-// } catch (err) {
-//   console.error(err);
-// }
+//update(config.dechetheque.name, "1-Déchet")
+//update(config.dcvm.name, "Personne", 32)
 
 
   //  maxRecords: 9,

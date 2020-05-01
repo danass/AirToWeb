@@ -1,4 +1,4 @@
-//this is for future module for accessing data with lodash instead of current implementation
+//this is for future module accessing data with lodash instead of current implementation
 
 // const fields = ["Prenom", "Nom", "Moto"]; //clés de lecture
 

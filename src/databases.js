@@ -26,10 +26,14 @@ var files = fs.readdirSync(rootdir + "/data")
   });
 
 exports.databases = {
-  db:database
+  db:database,
+  md5:md5
 };
 
 module.exports = this.databases
+global.db = database
+global.md5 = md5
+
 
 //show local export object
 //console.log(this.databases)
