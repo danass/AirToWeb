@@ -3,165 +3,178 @@
 
 const express = require("express");
 const site = express();
-var databases = require("../databases.js");
-
-// local names for databases (for easyness)
-const data = databases.db.dcvm.data
-const dechetdata = databases.db.dechetheque.data
-const evaluation = databases.db.evaluation.data
+let db = require("../async.js");
 
 
-module.exports = function(site){
+  module.exports = async function (site) {
+
+  async function dcvm() {return await db.reload("dcvm").then(function (e) { return e.dcvm.data})}
+  async function dechetheque() {return await db.reload("dechetheque").then(function (e) { return e.dechetheque.data})}
+  async function evaluation() {return await db.reload("evaluation").then(function (e) { return e.evaluation.data})}
+  //  let dcvm = await db.reload("dcvm").then(function (e) { return e.dcvm.data})
 
     const foldir = process.cwd() + "/public";
 
     site.set("view engine", "pug");
     site.use(express.static(foldir));
-    
+  
+    console.log()
+      site.get("/", async function (req, res, next) {
+      
+       res.render("vm/apprenants", {
+        title: "Formation Design Circulaire",
+        persons: await dcvm()
 
-site.get("/", function(req, res, next) {
-    res.render("vm/apprenants", {
-      title: "Formation Design Circulaire",
-      persons: data
-    });
-    next();
-  });
-  
-  site.get("/competences", function(req, res, next) {
-    res.render("vm/competences", {
-      title: "Compétences déclarées - Formation Design Circulaire",
-      persons: data
+      });
+      next();
     });
   
-    next();
-  });
-  
-  site.get("/cours", function(req, res, next) {
-    res.render("vm/cours", {
-      title: "Liste des cours - Formation Design Circulaire",
-    });
-  
-    next();
-  });
-  
-  site.get("/evaluation", function(req, res, next) {
-    res.render("vm/evaluation", {
-      title: "Evaluation Retours Formation - Formation Design Circulaire",
-      evaluation: evaluation
-    });
-  
-    next();
-  });
-  
-  site.get("/softskills", function(req, res, next) {
-    res.render("vm/softskills", {
-      title: "Softskills - Formation Design Circulaire"
-    });
-  
-    next();
-  });
+    site.get("/competences", async function (req, res, next) {
 
-  site.get("/retours", function(req, res, next) {
-    res.render("vm/retours", {
-      title: "Retours evaluation - Formation Design Circulaire"
+      res.render("vm/competences", {
+        title: "Compétences déclarées - Formation Design Circulaire",
+        persons: await dcvm()
+      });
+      next();
     });
   
-    next();
-  });
-  
-  
-  site.get("/pads", function(req, res, next) {
-    res.render("vm/pads", {
-      title: "Pads Discussions - Formation Design Circulaire",
-      persons: data
+    site.get("/cours", async function (req, res, next) {
+
+      res.render("vm/cours", {
+        title: "Liste des cours - Formation Design Circulaire",
+      });
+      next();
     });
   
-    next();
-  });
-  
-  
-  site.get("/:dechetk", function(req, res, next) {
-    if (req.params.dechetk == "dechetk") {
-      res.render("vm/dechetk", {
-        title: "Déchéthèque - Formation Design Circulaire",
-        dechets: dechetdata
+    site.get("/evaluation", async function (req, res, next) {
+
+      res.render("vm/evaluation", {
+        title: "Evaluation Retours Formation - Formation Design Circulaire",
+        evaluation: await evaluation()
       });
-    }
-    next();
-  });
   
-  site.get("/dechetk/:dechet", function(req, res, next) {
-    for (let dechet of dechetdata) {
-      if (req.params.dechet === dechet._id) {
-        res.render("vm/dechet", {
-          title: "Dechet " + dechet.Nom + " - Formation Design Circulaire",
-          dechet: dechet
-        });
-      }
-    }
-    next();
-  });
+      next();
+    });
   
-  site.get("/:apprenants", function(req, res, next) {
-    if (req.params.apprenants == "apprenants") {
-      res.render("vm/apprenants", {
-        title: "Trombi - Formation Design Circulaire",
-        persons: data
+    site.get("/softskills", async function (req, res, next) {
+
+      res.render("vm/softskills", {
+        title: "Softskills - Formation Design Circulaire"
       });
-    }
-    next();
-  });
   
-  site.get("/apprenants/:user", function(req, res, next) {
-    for (let person of data) {
-      if (req.params.user === person.Prenom) {
-        res.render("vm/ficheindividuelle", {
-          title: "Fiche de " + person.Prenom + " - Formation Design Circulaire",
-          persons: person
-        });
-      }
-    }
-    next();
-  });
+      next();
+    });
   
-  
-  site.get("/:enseignants", function(req, res, next) {
-    if (req.params.enseignants == "enseignants") {
-      res.render("vm/enseignants", {
-        title: "Trombi Enseignants - Formation Design Circulaire",
-        persons: data
+    site.get("/retours", async function (req, res, next) {
+      res.render("vm/retours", {
+        title: "Retours evaluation - Formation Design Circulaire"
       });
-    }
-    next();
-  });
   
-  site.get("/enseignants/:user", function(req, res, next) {
-    for (let person of data) {
-      if (req.params.user === person.Prenom) {
-        res.render("vm/ficheindividuelle", {
-          title: "Fiche de " + person.Prenom + " - Formation Design Circulaire",
-          persons: person
+      next();
+    });
+  
+  
+    site.get("/pads", async function (req, res, next) {
+
+      res.render("vm/pads", {
+        title: "Pads Discussions - Formation Design Circulaire",
+        persons: await dcvm()
+      });
+  
+      next();
+    });
+  
+  
+    site.get("/:dechetk", async function (req, res, next) {
+
+      if (req.params.dechetk == "dechetk") {
+        res.render("vm/dechetk", {
+          title: "Déchéthèque - Formation Design Circulaire",
+          dechets: await dechetheque()
         });
       }
-    }
-    next();
-  });
+      next();
+    });
   
+    site.get("/dechetk/:dechet", async function (req, res, next) {
+
+      for (let dechet of await dechetheque()) {
+        if (req.params.dechet === dechet._id) {
+          res.render("vm/dechet", {
+            title: "Dechet " + dechet.Nom + " - Formation Design Circulaire",
+            dechet: dechet
+          });
+        }
+      }
+      next();
+    });
   
-  
-  site.get("/journal/:user", function(req, res, next) {
-    for (let person of data) {
-      if (req.params.user === person.Prenom) {
-        res.render("vm/journal", {
-          title: "Journal de " + person.Prenom + " - Formation Design Circulaire",
-          persons: person
+    site.get("/:apprenants", async function (req, res, next) {
+
+      if (req.params.apprenants == "apprenants") {
+        res.render("vm/apprenants", {
+          title: "Trombi - Formation Design Circulaire",
+          persons: await dcvm()
         });
       }
-    }
-    res.end();
-  });
+      next();
+    });
+  
+    site.get("/apprenants/:user", async function (req, res, next) {
+
+      for (let person of await dcvm()) {
+        if (req.params.user === person.Prenom) {
+          res.render("vm/ficheindividuelle", {
+            title: "Fiche de " + person.Prenom + " - Formation Design Circulaire",
+            persons: person
+          });
+        }
+      }
+      next();
+    });
+  
+  
+    site.get("/:enseignants", async function (req, res, next) {
+
+      if (req.params.enseignants == "enseignants") {
+        res.render("vm/enseignants", {
+          title: "Trombi Enseignants - Formation Design Circulaire",
+          persons: await dcvm()
+        });
+      }
+      next();
+    });
+  
+    site.get("/enseignants/:user", async function (req, res, next) {
+
+      for (let person of await dcvm()) {
+        if (req.params.user === person.Prenom) {
+          res.render("vm/ficheindividuelle", {
+            title: "Fiche de " + person.Prenom + " - Formation Design Circulaire",
+            persons: person
+          });
+        }
+      }
+      next();
+    });
+  
+  
+  
+    site.get("/journal/:user", async function (req, res, next) {
  
- 
+      for (let person of await dcvm()) {
+        if (req.params.user === person.Prenom) {
+          res.render("vm/journal", {
+            title: "Journal de " + person.Prenom + " - Formation Design Circulaire",
+            persons: person
+          });
+        }
+      }
+      res.end();
+    });
   
-}
+  
+  
+  }
+
 
